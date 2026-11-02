@@ -16,13 +16,11 @@ Tệp Manifest cung cấp toàn bộ thông tin thiết yếu cho hệ điều h
 * **Khai báo các thành phần ứng dụng (App Components):** Định nghĩa tất cả Activity, Service, Broadcast Receiver, và Content Provider có trong ứng dụng.
 * **Quản lý quyền truy cập (Permissions):** Khai báo các quyền mà ứng dụng cần người dùng cấp phép (Internet, Camera, Vị trí, Đọc/Ghi bộ nhớ, v.v.) cũng như các quyền do ứng dụng tự định nghĩa.
 * **Định cấu hình phần cứng và phần mềm yêu cầu (Hardware/Software Features):** Xác định các phần cứng (Camera, Bluetooth, Sensor) hoặc phần mềm mà thiết bị phải có để chạy được ứng dụng.
-* **Định cấu hình thông tin hiển thị và giao diện:** Thiết lập biểu tượng (Icon), nhãn ứng dụng (Label), Chủ đề (Theme), hỗ trợ màn hình, ngôn ngữ, v.v.
+* **Định cấu hình thông tin hiển thị và giao diện:** Icon,nhãn ứng dụng (Label), Chủ đề, hỗ trợ màn hình, ngôn ngữ, v.v.
 
 ---
 
 ## 3. Cấu Trúc Tổng Quan
-
-Dưới đây là sơ đồ cấu trúc các thẻ cơ bản thường xuất hiện trong một file `AndroidManifest.xml`:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -82,7 +80,6 @@ Dưới đây là sơ đồ cấu trúc các thẻ cơ bản thường xuất hi
 ### 4.2. Thẻ Khai Báo Quyền `<uses-permission>`
 * Khai báo các quyền mà ứng dụng cần truy cập để hoạt động (ví dụ: Camera, vị trí GPS, mạng Internet...).
 * **Ví dụ:** `<uses-permission android:name="android.permission.CAMERA" />`
-* Nếu không khai báo quyền tại đây, hệ thống sẽ từ chối truy cập tài nguyên tương ứng khi ứng dụng thực thi.
 
 ### 4.3. Thẻ Định Nghĩa Quyền Riêng `<permission>`
 * Sử dụng khi ứng dụng của bạn muốn giới hạn quyền truy cập vào các thành phần của chính nó từ các ứng dụng khác trên thiết bị.
@@ -90,7 +87,7 @@ Dưới đây là sơ đồ cấu trúc các thẻ cơ bản thường xuất hi
 ### 4.4. Thẻ Khai Báo Tính Năng Phần Cứng/Phần Mềm `<uses-feature>`
 * Khai báo các tính năng thiết bị mà ứng dụng yêu cầu. Google Play Store sẽ dựa vào thẻ này để lọc ứng dụng, không cho phép các thiết bị thiếu tính năng tương ứng tải app về.
 * **Thuộc tính `android:required`:**
-  * `true` *(Mặc định)*: Bắt buộc thiết bị phải có tính năng này mới cho cài đặt.
+  * `true`: Bắt buộc thiết bị phải có tính năng này mới cho cài đặt.
   * `false`: Ưu tiên nếu có, nhưng thiết bị không có vẫn cho phép cài đặt.
 
 ### 4.5. Thẻ Thư Viện Liên Kết `<uses-library>`
@@ -99,18 +96,18 @@ Dưới đây là sơ đồ cấu trúc các thẻ cơ bản thường xuất hi
 ### 4.6. Thẻ Cấu Hình Ứng Dụng `<application>`
 * Thẻ chứa tất cả các cấu hình chung của ứng dụng và là thẻ cha chứa các thành phần cốt lõi của ứng dụng Android.
 * **Các thuộc tính quan trọng:**
-  * `android:icon` / `android:roundIcon`: Biểu tượng hiển thị của ứng dụng.
+  * `android:icon` / `android:roundIcon`: Icon của ứng dụng.
   * `android:label`: Tên hiển thị của ứng dụng trên màn hình chính.
   * `android:theme`: Theme/Giao diện mặc định cho toàn bộ ứng dụng.
   * `android:allowBackup`: Cho phép sao lưu dữ liệu ứng dụng hay không.
-  * `android:supportsRtl`: Hỗ trợ ngôn ngữ đọc từ phải sang trái (RTL) hay không.
+  * `android:supportsRtl`: Hỗ trợ ngôn ngữ đọc từ phải sang trái.
   * `android:name`: Chỉ định lớp kế thừa từ `Application` (nếu có custom Application class).
 
 ---
 
 ## 5. Bốn Thành Phần Cốt Lõi Trong Thẻ `<application>`
 
-> ⚠️ **Lưu ý quan trọng:** Hệ điều hành Android quản lý các thành phần ứng dụng thông qua 4 thẻ khai báo dưới đây. Mọi thành phần phải được khai báo trong Manifest, nếu không hệ thống sẽ không nhận diện được và có thể gây Crash app (ngoại trừ BroadcastReceiver có thể đăng ký động qua code).
+> **Lưu ý quan trọng:** Hệ điều hành Android quản lý các thành phần ứng dụng thông qua 4 thẻ khai báo dưới đây. Mọi thành phần phải được khai báo trong Manifest, nếu không hệ thống sẽ không nhận diện được và có thể gây Crash app (ngoại trừ BroadcastReceiver có thể đăng ký động qua code).
 
 ### 5.1. Thẻ `<activity>`
 * Đại diện cho một màn hình giao diện người dùng (UI).
@@ -126,7 +123,7 @@ Dưới đây là sơ đồ cấu trúc các thẻ cơ bản thường xuất hi
 * `android:foregroundServiceType`: Khai báo loại Foreground Service (từ Android 10/14 trở đi) ví dụ: `location`, `mediaPlayback`, `camera`...
 
 ### 5.3. Thẻ `<receiver>`
-* Đại diện cho `BroadcastReceiver`, dùng để lắng nghe và xử lý các thông điệp phát truyền rộng (Broadcast) từ hệ thống hoặc các ứng dụng khác (như sự kiện sạc pin, kết nối mạng thay đổi, khởi động lại thiết bị...).
+* Đại diện cho `BroadcastReceiver`, dùng để tiếp nhận và xử lý các sự kiện (Broadcast) từ hệ thống hoặc các ứng dụng khác (như sự kiện sạc pin, kết nối mạng thay đổi, khởi động lại thiết bị...).
 
 ### 5.4. Thẻ `<provider>`
 * Đại diện cho `ContentProvider`, quản lý việc truy cập và chia sẻ dữ liệu giữa các ứng dụng một cách an toàn (ví dụ: truy cập danh bạ, thư viện ảnh...).
